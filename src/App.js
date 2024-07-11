@@ -25,13 +25,13 @@ class FlagRenderer  {
 
     // Optional: Params for rendering. The same params that are passed to the cellRenderer function.
     init(params) {
-        let companyLogo = document.createElement('img');
-        companyLogo.src = `${params.value.toLowerCase()}`;
-        companyLogo.setAttribute('class', 'logo');
-
+        let countryFlag = document.createElement('img');
+        countryFlag.src = `${params.value.toLowerCase()}`;
+        countryFlag.setAttribute('class', 'flag');
+         
         this.eGui = document.createElement('span');
         this.eGui.setAttribute('class', 'imgSpanLogo');
-        this.eGui.appendChild(companyLogo);
+        this.eGui.appendChild(countryFlag);
     }
 
     // Return the DOM element of the component

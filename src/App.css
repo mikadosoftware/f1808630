@@ -30,6 +30,10 @@
   padding: 20px;
 }
 
+.flag {
+  height: 40px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
