@@ -13,6 +13,23 @@
   font-size: 16px;
 }
 
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns, each taking half of the space */
+  height: 100vh; /* Full viewport height */
+}
+
+.left-side {
+  background-color: #f0f0f0; 
+  padding: 20px;
+}
+
+.right-side {
+  background-color: #e0e0e0; 
+  padding: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

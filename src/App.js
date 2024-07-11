@@ -15,6 +15,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './App.css';
+// the API URL to call for a listing of flags.
 const url = 'https://restcountries.com/v3.1/all?fields=name,flags'
 const LOCAL_ARRAY_NAME = 'stored_country'
 
@@ -46,51 +47,68 @@ class FlagRenderer  {
 
 
 
-function App() {
+export function FlagTable() {
   const [rowData, setRowData] = useState([]);
   const [quickFilterText, setQuickFilterText] = useState('')
   useEffect(() => {
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        // Perform operations on the data
+        // CLean up data from API, and install to grid
         const processedData = data.map(item => ({
-          flag_url: item.flags.png,
-          common_name: item.name.common,
-          official_name: item.name.official
-        }));
+                                                 flag_url: item.flags.png,
+                                                 common_name: item.name.common,
+                                                 official_name: item.name.official
+                                                 }));
         setRowData(processedData);
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  // define columns 	
   const columnDefs = [
-    { headerName: "Flag", field: "flag_url",
-	    cellRenderer: FlagRenderer},
+    { headerName: "Flag", field: "flag_url", cellRenderer: FlagRenderer},
     { headerName: "Name", field: "common_name" },
     { headerName: "Official Name", field: "official_name" }
   ];
-
+  
   return (
-    <div className="App">
-      <h1>Simple React Demonstration</h1>
-      <div className="ag-theme-alpine" style={{ height: 600, width: 800 }}>
+      <div>
+      <div>
+      <input type="text" 
+	     placeholder="Enter Search Term ..."
+             onChange={(e) => setQuickFilterText(e.target.value)}
+	     style={{ marginBottom: '10px', padding: '5px' }} />
+       </div>
+	  <div className="ag-theme-alpine" style={{ height: 600, width: 800 }}>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
 	  onRowClicked={(e) => save_row_data(e)}
 	  quickFilterText={quickFilterText}
         />
-</div>
-<div>
- <input type="text" placeholder="Quick Filter..."
- onChange={(e) => setQuickFilterText(e.target.value)}
-	  style={{ marginBottom: '10px', padding: '5px' }} />
-     </div>
+         </div>
+       </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="App">
+      <div className="grid-container">
+        <div className="left-side">
+          <FlagTable />
+        </div>
+        <div className="right-side">
+          <h1>Simple React Demo</h1>
+          <p>This is to show basic facility with React.</p>
+	  
 	  <div>
-<ShowLocalStorageButton/>
+          <ShowLocalStorageButton/>
+         </div>
+        </div>
+      </div>
     </div>
-	  </div>
   );
 }
 export default App;
