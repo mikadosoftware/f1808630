@@ -3,9 +3,11 @@
 Please download using `git clone https://github.com/mikadosoftware/f1808630`
 Then run:
 
-`$ cd f1808630`
-`$ npm install`
-`$ npm start`
+```
+$ cd f1808630
+$ npm install
+$ npm start
+```
 
 This will start the app in development mode, and should bring up your browser 
 on http://localhost:3000
