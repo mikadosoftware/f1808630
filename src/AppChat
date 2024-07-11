@@ -1,0 +1,35 @@
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Replace 'YOUR_API_URL' with the actual URL of the API
+    fetch('YOUR_API_URL')
+      .then(response => response.json())
+      .then(data => {
+        // Assuming data is an array of objects
+        setData(data);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+  return (
+    <div className="App">
+      <h1>Data Grid</h1>
+      <div className="grid-container">
+        {data.map((item, index) => (
+          <div className="grid-item" key={index}>
+            <p>Field 1: {item.field1}</p>
+            <p>Field 2: {item.field2}</p>
+            <p>Field 3: {item.field3}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
